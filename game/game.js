@@ -3,9 +3,79 @@ function init() {
     let app = new PIXI.Application({ width: 800, height: 600 });
     document.body.appendChild(app.view);
 
+    //mousevariables
+    let mx = 0;
+    let my = 0;
+    let tind = 0;
+
     //Draws the grid
     let grid = drawgr();
+    let gofx = 220;
+    let gofy = 30;
+    grid.x = gofx;
+    grid.y = gofy
     app.stage.addChild(grid)
+
+    let tx = [0, 1, 2, 3, 4, 5, 6, 7,
+              0, 1, 2, 3, 4, 5, 6, 7,
+              0, 1, 2, 3, 4, 5, 6, 7,
+              0, 1, 2, 3, 4, 5, 6, 7,
+              0, 1, 2, 3, 4, 5, 6, 7,
+              0, 1, 2, 3, 4, 5, 6, 7,
+              0, 1, 2, 3, 4, 5, 6, 7,
+              0, 1, 2, 3, 4, 5, 6, 7,
+              0, 1, 2, 3, 4, 5, 6, 7,
+              0, 1, 2, 3, 4, 5, 6, 7,
+              0, 1, 2, 3, 4, 5, 6, 7,
+              0, 1, 2, 3, 4, 5, 6, 7,]
+            
+    let ty = [0, 0, 0, 0, 0, 0, 0, 0,
+              1, 1, 1, 1, 1, 1, 1, 1,
+              2, 2, 2, 2, 2, 2, 2, 2, 
+              3, 3, 3, 3, 3, 3, 3, 3, 
+              4, 4, 4, 4, 4, 4, 4, 4, 
+              5, 5, 5, 5, 5, 5, 5, 5, 
+              6, 6, 6, 6, 6, 6, 6, 6, 
+              7, 7, 7, 7, 7, 7, 7, 7, 
+              8, 8, 8, 8, 8, 8, 8, 8, 
+              9, 9, 9, 9, 9, 9, 9, 9, 
+              10, 10, 10, 10, 10, 10, 10, 10, 
+              11, 11, 11, 11, 11, 11, 11, 11, ]
+
+    //mouse stuff
+    app.stage.interactive = true;
+    app.stage.on('mousemove', function (e) {
+      //console.log('Mouse moved');
+      //console.log('X', e.data.global.x, 'Y', e.data.global.y);
+      mx = e.data.global.x;
+      my = e.data.global.y;
+    });
+
+    let gx=4;
+    let gy=3;
+
+    let tgx=2+gofx;
+    let tgy=2+gofy;
+    let ltind = 0;
+
+    app.stage.on('mousedown', function (e) {
+        tind=checkgrid(mx, my, gofx, gofy).indexOf(true);
+        if(tind >= 0)
+        {
+            tgx=45 * tx[tind] + gofx + 2;
+            tgy=45 * ty[tind] + gofy + 2;
+        }
+        if(tind == ltind)
+        {
+            gx = tx[tind];
+            gy = ty[tind];
+        }
+        else
+            ltind = tind;
+    })
+
+    let target = PIXI.Sprite.from('./resources/target.png');
+    app.stage.addChild(target);
 
     //Draws the player
     let p1pawn = PIXI.Sprite.from('./resources/pawn.png');
@@ -18,22 +88,21 @@ function init() {
     p1.addChild(p1face);
     app.stage.addChild(p1);
 
-
     //Test code
     let p1x=0;
     let p1y=0;
-
-    let gx=4;
-    let gy=3;
 
     let elapsed = 0.0;
 
     app.ticker.add((delta) => {
 
       elapsed += delta;
-      
-      p1x = 45 * gx
-      p1y = 45 * gy - 10;
+
+      target.x = tgx;
+      target.y = tgy;
+
+      p1x = 45 * gx + gofx
+      p1y = 45 * gy - 10 + gofy;
 
       p1.x = p1x;
       p1.y = p1y;
@@ -90,5 +159,56 @@ function drawgr() {
 
     //Creates grid object and returns it.
     grid.addChild(gridgfx);
+
     return grid;
+}
+
+function checkgrid(mx, my, gofx, gofy) {
+    mx = mx-gofx;
+    my = my-gofy;
+
+    let indx = 0;
+
+    console.log(mx);
+    console.log(my);
+
+    let grid = Array(96).fill(false)
+    for(let i=0; i<12; i++) {
+        grid[indx] = inbox(mx,my,0,45*i,45, 45*i+45)
+        indx++;
+
+        grid[indx] = inbox(mx,my,45,45*i,90, 45*i+45)
+        indx++;
+
+        grid[indx] = inbox(mx,my,90,45*i,135, 45*i+45)
+        indx++;
+
+        grid[indx] = inbox(mx,my,135,45*i,180, 45*i+45)
+        indx++;
+
+        grid[indx] = inbox(mx,my,180,45*i,225, 45*i+45)
+        indx++;
+
+        grid[indx] = inbox(mx,my,225,45*i,270, 45*i+45)
+        indx++;
+
+        grid[indx] = inbox(mx,my,270,45*i,315, 45*i+45)
+        indx++;
+
+        grid[indx] = inbox(mx,my,315,45*i,360, 45*i+45)
+        indx++;
+
+    }
+
+    return grid;
+}
+
+function inbox(mx, my, ax, ay, bx, by) {
+    if(mx > ax && mx < bx && my > ay && my < by)
+    {
+        console.log("TRUE");
+        return true;
+    }
+    else
+        return false;
 }
