@@ -1,3 +1,5 @@
+// Please note that a lot of this will be rewritten.
+
 function init() {
     //Creates Pixi.JS Instance
     let app = new PIXI.Application({ width: 800, height: 600 });
@@ -15,6 +17,8 @@ function init() {
     grid.x = gofx;
     grid.y = gofy
     app.stage.addChild(grid)
+
+    //Arrays allowing grid coordinates from a single number
 
     let tx = [0, 1, 2, 3, 4, 5, 6, 7,
               0, 1, 2, 3, 4, 5, 6, 7,
@@ -42,7 +46,7 @@ function init() {
               10, 10, 10, 10, 10, 10, 10, 10, 
               11, 11, 11, 11, 11, 11, 11, 11, ]
 
-    //mouse stuff
+    //This is basic mouse input
     app.stage.interactive = true;
     app.stage.on('mousemove', function (e) {
       //console.log('Mouse moved');
@@ -51,14 +55,19 @@ function init() {
       my = e.data.global.y;
     });
 
+    //GX and GY are the players coordinates on the grid
+
     let gx=4;
     let gy=3;
 
+    //tgx is the coordinates for the target
+    //ltind is the last target index. So if you double click, it moves you.
     let tgx=2+gofx;
     let tgy=2+gofy;
     let ltind = 0;
 
     app.stage.on('mousedown', function (e) {
+        //Mouse input for checking grid and moving player
         tind=checkgrid(mx, my, gofx, gofy).indexOf(true);
         if(tind >= 0)
         {
@@ -74,6 +83,7 @@ function init() {
             ltind = tind;
     })
 
+    //Drawing stuff
     let target = PIXI.Sprite.from('./resources/target.png');
     app.stage.addChild(target);
 
@@ -150,6 +160,7 @@ function drawgr() {
         gridgfx.drawRect(cs*7, i*cs, cs, cs);
     }
 
+    //Switches row colors.
     function altrow() {
         ca1 = c1;
         ca2 = c2;
@@ -164,13 +175,12 @@ function drawgr() {
 }
 
 function checkgrid(mx, my, gofx, gofy) {
+    //This checks where the user is clicking on the grid
+    //by checking at predefined coordinates
     mx = mx-gofx;
     my = my-gofy;
 
     let indx = 0;
-
-    console.log(mx);
-    console.log(my);
 
     let grid = Array(96).fill(false)
     for(let i=0; i<12; i++) {
@@ -204,9 +214,10 @@ function checkgrid(mx, my, gofx, gofy) {
 }
 
 function inbox(mx, my, ax, ay, bx, by) {
+    //A simple thing to check if the mouse is within the
+    //box defined with points A and B,
     if(mx > ax && mx < bx && my > ay && my < by)
     {
-        console.log("TRUE");
         return true;
     }
     else
