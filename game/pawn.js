@@ -7,7 +7,7 @@ class pawn {
 
     //Grid coordinates
     gx=0;
-    gy=0;
+    gy=6;
 
     init = function() {
         //Set scale and add all of the images to the container
