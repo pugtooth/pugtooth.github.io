@@ -12,31 +12,34 @@ class board {
     gofy = 30;
 
     //Tx and Ty are lookups to get grid coordinates from a index
-    tx = [0, 1, 2, 3, 4, 5, 6, 7,
-        0, 1, 2, 3, 4, 5, 6, 7,
-        0, 1, 2, 3, 4, 5, 6, 7,
-        0, 1, 2, 3, 4, 5, 6, 7,
-        0, 1, 2, 3, 4, 5, 6, 7,
-        0, 1, 2, 3, 4, 5, 6, 7,
-        0, 1, 2, 3, 4, 5, 6, 7,
-        0, 1, 2, 3, 4, 5, 6, 7,
-        0, 1, 2, 3, 4, 5, 6, 7,
-        0, 1, 2, 3, 4, 5, 6, 7,
-        0, 1, 2, 3, 4, 5, 6, 7,
-        0, 1, 2, 3, 4, 5, 6, 7,]
+    tx = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,]
       
-    ty = [0, 0, 0, 0, 0, 0, 0, 0,
-        1, 1, 1, 1, 1, 1, 1, 1,
-        2, 2, 2, 2, 2, 2, 2, 2, 
-        3, 3, 3, 3, 3, 3, 3, 3, 
-        4, 4, 4, 4, 4, 4, 4, 4, 
-        5, 5, 5, 5, 5, 5, 5, 5, 
-        6, 6, 6, 6, 6, 6, 6, 6, 
-        7, 7, 7, 7, 7, 7, 7, 7, 
-        8, 8, 8, 8, 8, 8, 8, 8, 
-        9, 9, 9, 9, 9, 9, 9, 9, 
-        10, 10, 10, 10, 10, 10, 10, 10, 
-        11, 11, 11, 11, 11, 11, 11, 11, ]
+    ty = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 
+        3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 
+        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 
+        6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 
+        7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 
+        8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 
+        9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 
+        10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
+        11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
+        12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 
+    ]
 
     inittarget = function() {
         //Initiates target and sets its default values
@@ -65,7 +68,7 @@ class board {
         let gridgfx = new PIXI.Graphics();
         let cs = 45;
         
-        for(let i = 0; i < 12; i++)
+        for(let i = 0; i < 13; i++)
         {
             //Alternates row colors for checkered effect
             altrow()
@@ -93,6 +96,30 @@ class board {
     
             gridgfx.beginFill(c2);
             gridgfx.drawRect(cs*7, i*cs, cs, cs);
+            
+            gridgfx.beginFill(c1);
+            gridgfx.drawRect(cs*8, i*cs, cs, cs);
+    
+            gridgfx.beginFill(c2);
+            gridgfx.drawRect(cs*9, i*cs, cs, cs);
+    
+            gridgfx.beginFill(c1);
+            gridgfx.drawRect(cs*10, i*cs, cs, cs);
+    
+            gridgfx.beginFill(c2);
+            gridgfx.drawRect(cs*11, i*cs, cs, cs);
+    
+            gridgfx.beginFill(c1);
+            gridgfx.drawRect(cs*12, i*cs, cs, cs);
+    
+            gridgfx.beginFill(c2);
+            gridgfx.drawRect(cs*13, i*cs, cs, cs);
+    
+            gridgfx.beginFill(c1);
+            gridgfx.drawRect(cs*14, i*cs, cs, cs);
+    
+            gridgfx.beginFill(c2);
+            gridgfx.drawRect(cs*15, i*cs, cs, cs);
         }
     
         //Switches row colors.
@@ -118,8 +145,8 @@ class board {
     
         let indx = 0;
     
-        let gridc = Array(96).fill(false)
-        for(let i=0; i<12; i++) {
+        let gridc = Array(208).fill(false)
+        for(let i=0; i<13; i++) {
             gridc[indx] = this.inbox(mx,my,0,45*i,45, 45*i+45)
             indx++;
     
@@ -142,6 +169,32 @@ class board {
             indx++;
     
             gridc[indx] = this.inbox(mx,my,315,45*i,360, 45*i+45)
+            indx++;
+
+
+
+            gridc[indx] = this.inbox(mx,my,360,45*i,405, 45*i+45)
+            indx++;
+    
+            gridc[indx] = this.inbox(mx,my,405,45*i,450, 45*i+45)
+            indx++;
+    
+            gridc[indx] = this.inbox(mx,my,450,45*i,495, 45*i+45)
+            indx++;
+    
+            gridc[indx] = this.inbox(mx,my,495,45*i,535, 45*i+45)
+            indx++;
+    
+            gridc[indx] = this.inbox(mx,my,535,45*i,570, 45*i+45)
+            indx++;
+    
+            gridc[indx] = this.inbox(mx,my,570,45*i,615, 45*i+45)
+            indx++;
+    
+            gridc[indx] = this.inbox(mx,my,615,45*i,660, 45*i+45)
+            indx++;
+    
+            gridc[indx] = this.inbox(mx,my,660,45*i,705, 45*i+45)
             indx++;
     
         }

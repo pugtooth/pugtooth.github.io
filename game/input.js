@@ -17,7 +17,7 @@ class input {
         });
 
         //Mousedown event
-        grid.on('mousedown', function (e) {
+        app.stage.on('mousedown', function (e) {
             //Mouse input for checking grid and moving player
             //Finds the id of the grid cell that the user clicked
             this.tind=grid.checkgrid(this.mx, this.my).indexOf(true);
