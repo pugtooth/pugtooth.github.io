@@ -135,7 +135,6 @@ class board {
         this.grid.addChild(gridgfx);
         this.grid.x = this.gofx;
         this.grid.y = this.gofy
-        console.log(this)
     }
     
     checkgrid = function(mx, my) {
