@@ -2,7 +2,7 @@
 
 function init() {
     //Creates Pixi.JS Instance
-    let app = new PIXI.Application({ width: 800, height: 600 });
+    let app = new PIXI.Application({ backgroundColor: 0x5555ff, width: 800, height: 600 });
     document.body.appendChild(app.view);
 
     //mousevariables
