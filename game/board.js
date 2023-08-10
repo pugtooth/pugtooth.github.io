@@ -1,9 +1,58 @@
-class grid {
+class board {
 
     //The grid
     grid = null;
+    //target
+    target = null;
+    //target grid coordinates
+    tgx = 0;
+    txy = 0;
+    //Grid offset on screen
     gofx = 220;
     gofy = 30;
+
+    //Tx and Ty are lookups to get grid coordinates from a index
+    tx = [0, 1, 2, 3, 4, 5, 6, 7,
+        0, 1, 2, 3, 4, 5, 6, 7,
+        0, 1, 2, 3, 4, 5, 6, 7,
+        0, 1, 2, 3, 4, 5, 6, 7,
+        0, 1, 2, 3, 4, 5, 6, 7,
+        0, 1, 2, 3, 4, 5, 6, 7,
+        0, 1, 2, 3, 4, 5, 6, 7,
+        0, 1, 2, 3, 4, 5, 6, 7,
+        0, 1, 2, 3, 4, 5, 6, 7,
+        0, 1, 2, 3, 4, 5, 6, 7,
+        0, 1, 2, 3, 4, 5, 6, 7,
+        0, 1, 2, 3, 4, 5, 6, 7,]
+      
+    ty = [0, 0, 0, 0, 0, 0, 0, 0,
+        1, 1, 1, 1, 1, 1, 1, 1,
+        2, 2, 2, 2, 2, 2, 2, 2, 
+        3, 3, 3, 3, 3, 3, 3, 3, 
+        4, 4, 4, 4, 4, 4, 4, 4, 
+        5, 5, 5, 5, 5, 5, 5, 5, 
+        6, 6, 6, 6, 6, 6, 6, 6, 
+        7, 7, 7, 7, 7, 7, 7, 7, 
+        8, 8, 8, 8, 8, 8, 8, 8, 
+        9, 9, 9, 9, 9, 9, 9, 9, 
+        10, 10, 10, 10, 10, 10, 10, 10, 
+        11, 11, 11, 11, 11, 11, 11, 11, ]
+
+    inittarget = function() {
+        //Initiates target and sets its default values
+        this.target = PIXI.Sprite.from('./resources/target.png');
+        this.target.x = 2 + this.gofx;
+        this.target.y = 2 + this.gofy;
+        this.tgx = 0;
+        this.txy = 0;
+    }
+
+    updatetarget = function(gx, gy) {
+        //Calculates target position based off of grid
+        //coordinates from lookup table
+        this.target.x=45 * gx + this.gofx + 2;
+        this.target.y=45 * gy + this.gofy + 2;
+    }
 
     init = function() {
         //Draws a 8x12 grid.
@@ -48,16 +97,17 @@ class grid {
     
         //Switches row colors.
         function altrow() {
-            ca1 = c1;
-            ca2 = c2;
+            let ca1 = c1;
+            let ca2 = c2;
             c1 = ca2;
             c2 = ca1;
         }
     
         //Creates grid object
         this.grid.addChild(gridgfx);
-        this.grid.x = gofx;
-        this.grid.y = gofy
+        this.grid.x = this.gofx;
+        this.grid.y = this.gofy
+        console.log(this)
     }
     
     checkgrid = function(mx, my) {
@@ -70,33 +120,33 @@ class grid {
     
         let gridc = Array(96).fill(false)
         for(let i=0; i<12; i++) {
-            gridc[indx] = inbox(mx,my,0,45*i,45, 45*i+45)
+            gridc[indx] = this.inbox(mx,my,0,45*i,45, 45*i+45)
             indx++;
     
-            gridc[indx] = inbox(mx,my,45,45*i,90, 45*i+45)
+            gridc[indx] = this.inbox(mx,my,45,45*i,90, 45*i+45)
             indx++;
     
-            gridc[indx] = inbox(mx,my,90,45*i,135, 45*i+45)
+            gridc[indx] = this.inbox(mx,my,90,45*i,135, 45*i+45)
             indx++;
     
-            gridc[indx] = inbox(mx,my,135,45*i,180, 45*i+45)
+            gridc[indx] = this.inbox(mx,my,135,45*i,180, 45*i+45)
             indx++;
     
-            gridc[indx] = inbox(mx,my,180,45*i,225, 45*i+45)
+            gridc[indx] = this.inbox(mx,my,180,45*i,225, 45*i+45)
             indx++;
     
-            gridc[indx] = inbox(mx,my,225,45*i,270, 45*i+45)
+            gridc[indx] = this.inbox(mx,my,225,45*i,270, 45*i+45)
             indx++;
     
-            gridc[indx] = inbox(mx,my,270,45*i,315, 45*i+45)
+            gridc[indx] = this.inbox(mx,my,270,45*i,315, 45*i+45)
             indx++;
     
-            gridc[indx] = inbox(mx,my,315,45*i,360, 45*i+45)
+            gridc[indx] = this.inbox(mx,my,315,45*i,360, 45*i+45)
             indx++;
     
         }
     
-        return grid;
+        return gridc;
     }
     
     inbox = function(mx, my, ax, ay, bx, by) {
