@@ -11,12 +11,9 @@ function init() {
     let tind = 0;
 
     //Draws the grid
-    let grid = drawgr();
-    let gofx = 220;
-    let gofy = 30;
-    grid.x = gofx;
-    grid.y = gofy
-    app.stage.addChild(grid)
+    let grid = new grid();
+    grid.init();
+    app.stage.addChild(grid.grid)
 
     //Arrays allowing grid coordinates from a single number
 
@@ -55,11 +52,6 @@ function init() {
       my = e.data.global.y;
     });
 
-    //GX and GY are the players coordinates on the grid
-
-    let gx=4;
-    let gy=3;
-
     //tgx is the coordinates for the target
     //ltind is the last target index. So if you double click, it moves you.
     let tgx=2+gofx;
@@ -88,15 +80,10 @@ function init() {
     app.stage.addChild(target);
 
     //Draws the player
-    let p1pawn = PIXI.Sprite.from('./resources/pawn.png');
-    let p1cos = PIXI.Sprite.from('./resources/clothes/default.png');
-    let p1face = PIXI.Sprite.from('./resources/face/default.png');
-    let p1 = new PIXI.Container();
-    p1.scale.set(0.5, 0.5)
-    p1.addChild(p1pawn)
-    p1.addChild(p1cos);
-    p1.addChild(p1face);
-    app.stage.addChild(p1);
+
+    pawn = new pawn();
+    pawn.init();
+    app.stage.addChild(pawn.pawn)
 
     //Test code
     let p1x=0;
@@ -111,115 +98,6 @@ function init() {
       target.x = tgx;
       target.y = tgy;
 
-      p1x = 45 * gx + gofx
-      p1y = 45 * gy - 10 + gofy;
-
-      p1.x = p1x;
-      p1.y = p1y;
+      pawn.update();
     });
-}
-
-function drawgr() {
-    //Draws a 8x12 grid.
-    //c1 is the first color,
-    //c2 is the second.
-    //cs is the size of the cell.
-    let c1 = 0x164c0f;
-    let c2 = 0x2e9020;
-    let grid = new PIXI.Container();
-    let gridgfx = new PIXI.Graphics();
-    let cs = 45;
-    
-    for(let i = 0; i < 12; i++)
-    {
-        //Alternates row colors for checkered effect
-        altrow()
-        //Draws 8 columns
-        gridgfx.beginFill(c1);
-        gridgfx.drawRect(0, i*cs, cs, cs);
-
-        gridgfx.beginFill(c2);
-        gridgfx.drawRect(cs, i*cs, cs, cs);
-
-        gridgfx.beginFill(c1);
-        gridgfx.drawRect(cs*2, i*cs, cs, cs);
-
-        gridgfx.beginFill(c2);
-        gridgfx.drawRect(cs*3, i*cs, cs, cs);
-
-        gridgfx.beginFill(c1);
-        gridgfx.drawRect(cs*4, i*cs, cs, cs);
-
-        gridgfx.beginFill(c2);
-        gridgfx.drawRect(cs*5, i*cs, cs, cs);
-
-        gridgfx.beginFill(c1);
-        gridgfx.drawRect(cs*6, i*cs, cs, cs);
-
-        gridgfx.beginFill(c2);
-        gridgfx.drawRect(cs*7, i*cs, cs, cs);
-    }
-
-    //Switches row colors.
-    function altrow() {
-        ca1 = c1;
-        ca2 = c2;
-        c1 = ca2;
-        c2 = ca1;
-    }
-
-    //Creates grid object and returns it.
-    grid.addChild(gridgfx);
-
-    return grid;
-}
-
-function checkgrid(mx, my, gofx, gofy) {
-    //This checks where the user is clicking on the grid
-    //by checking at predefined coordinates
-    mx = mx-gofx;
-    my = my-gofy;
-
-    let indx = 0;
-
-    let grid = Array(96).fill(false)
-    for(let i=0; i<12; i++) {
-        grid[indx] = inbox(mx,my,0,45*i,45, 45*i+45)
-        indx++;
-
-        grid[indx] = inbox(mx,my,45,45*i,90, 45*i+45)
-        indx++;
-
-        grid[indx] = inbox(mx,my,90,45*i,135, 45*i+45)
-        indx++;
-
-        grid[indx] = inbox(mx,my,135,45*i,180, 45*i+45)
-        indx++;
-
-        grid[indx] = inbox(mx,my,180,45*i,225, 45*i+45)
-        indx++;
-
-        grid[indx] = inbox(mx,my,225,45*i,270, 45*i+45)
-        indx++;
-
-        grid[indx] = inbox(mx,my,270,45*i,315, 45*i+45)
-        indx++;
-
-        grid[indx] = inbox(mx,my,315,45*i,360, 45*i+45)
-        indx++;
-
-    }
-
-    return grid;
-}
-
-function inbox(mx, my, ax, ay, bx, by) {
-    //A simple thing to check if the mouse is within the
-    //box defined with points A and B,
-    if(mx > ax && mx < bx && my > ay && my < by)
-    {
-        return true;
-    }
-    else
-        return false;
 }
