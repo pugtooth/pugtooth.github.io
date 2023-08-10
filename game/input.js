@@ -9,6 +9,7 @@ class input {
     init = function(app, grid, pawn) {
         //Sets the app to interactive
         app.stage.interactive = true;
+        grid.interactive = true;
         //Tracks mouse position
         app.stage.on('mousemove', function (e) {
           this.mx = e.data.global.x;
@@ -16,7 +17,7 @@ class input {
         });
 
         //Mousedown event
-        app.stage.on('mousedown', function (e) {
+        grid.on('mousedown', function (e) {
             //Mouse input for checking grid and moving player
             //Finds the id of the grid cell that the user clicked
             this.tind=grid.checkgrid(this.mx, this.my).indexOf(true);
