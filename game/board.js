@@ -5,8 +5,8 @@ class board {
     //target
     target = null;
     //target grid coordinates
-    tgx = 0;
-    txy = 0;
+    tgx = 1;
+    txy = 6;
     //Grid offset on screen
     gofx = 220;
     gofy = 30;
@@ -44,17 +44,18 @@ class board {
     inittarget = function() {
         //Initiates target and sets its default values
         this.target = PIXI.Sprite.from('./resources/target.png');
-        this.target.x = 2 + this.gofx;
-        this.target.y = 2 + this.gofy;
+        this.target.x = 47;
+        this.target.y = 272;
         this.tgx = 0;
         this.txy = 0;
+        this.grid.addChild(this.target)
     }
 
     updatetarget = function(gx, gy) {
         //Calculates target position based off of grid
         //coordinates from lookup table
-        this.target.x=45 * gx + this.gofx + 2;
-        this.target.y=45 * gy + this.gofy + 2;
+        this.target.x=45 * gx + 2;
+        this.target.y=45 * gy + 2;
     }
 
     init = function() {
