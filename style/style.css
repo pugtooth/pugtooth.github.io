@@ -18,6 +18,7 @@ iframe {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    /* oh my bosh just work */
 }
 
 #homeheader {
