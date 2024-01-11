@@ -17,6 +17,7 @@ iframe {
     float:left;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 #homeheader {
