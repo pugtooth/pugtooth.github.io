@@ -56,8 +56,10 @@ iframe {
     box-sizing: border-box;
     padding: min(1vw, 1vh);
     margin: 0;
+    top: min(5vw, 5vh);
+    position: relative;
     width: 100%;
-    height: min(200vw, 100vh); 
+    height: min(200vw, 100vh);
     background-color: white;
 }
 
